@@ -1,4 +1,4 @@
-package util
+package collections
 
 // Set is a generic set implemented as a map[T]struct{}.
 type Set[T comparable] map[T]struct{}
@@ -30,6 +30,12 @@ func (s Set[T]) Has(element T) bool {
 // Len returns the number of elements in the set.
 func (s Set[T]) Len() int {
 	return len(s)
+}
+
+func (s Set[T]) Clear() {
+	for v := range s {
+		delete(s, v)
+	}
 }
 
 // ToSlice returns a slice containing the set's elements. The order is unspecified.
