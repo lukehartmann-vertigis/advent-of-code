@@ -1,4 +1,4 @@
-package array_helpers
+package slice_helpers
 
 func Filter[T any](source []T, condition func(item T) bool) []T {
 	filtered := []T{}
