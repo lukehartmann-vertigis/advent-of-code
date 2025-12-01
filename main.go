@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	aoc_2024 "github.com/Djosar/advent-of-code/2024/1"
+	aoc_2025 "github.com/Djosar/advent-of-code/2025/1"
 	aoc_helpers "github.com/Djosar/advent-of-code/util/aoc-helpers"
 	"github.com/joho/godotenv"
 )
@@ -15,11 +15,11 @@ func main() {
 		return
 	}
 
-	year2024 := []*aoc_helpers.AOCDay{
-		aoc_2024.Day01(),
+	year2025 := []*aoc_helpers.AOCDay{
+		aoc_2025.Day01(),
 	}
 
-	for _, day := range year2024 {
+	for _, day := range year2025 {
 		day.Run()
 	}
 }
