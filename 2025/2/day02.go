@@ -23,7 +23,7 @@ func Day02() *aoc_helpers.AOCDay {
 func part01(d *aoc_helpers.AOCDay) error {
 	ids := strings.Split(d.Input, ",")
 	sums := slice_helpers.Map(ids, func(item string) int {
-		return sumInvalids(item)
+		return sumInvalids(item, true)
 	})
 	sum := slice_helpers.Reduce(sums, func(acc int, elem int) int {
 		return acc + elem
@@ -33,7 +33,20 @@ func part01(d *aoc_helpers.AOCDay) error {
 	return nil
 }
 
-func sumInvalids(rng string) int {
+func part02(d *aoc_helpers.AOCDay) error {
+	ids := strings.Split(d.Input, ",")
+	sums := slice_helpers.Map(ids, func(item string) int {
+		return sumInvalids(item, false)
+	})
+	sum := slice_helpers.Reduce(sums, func(acc int, elem int) int {
+		return acc + elem
+	}, 0)
+
+	fmt.Println(sum)
+	return nil
+}
+
+func sumInvalids(rng string, part01 bool) int {
 	split := strings.Split(rng, "-")
 	splitInts := make([]int, len(split))
 	for idx, item := range split {
@@ -49,7 +62,12 @@ func sumInvalids(rng string) int {
 	invalidSum := 0
 	for _, item := range idRng {
 		idStr := strconv.Itoa(item)
-		invalid := invalidIDs(idStr)
+		invalid := false
+		if part01 {
+			invalid = invalidID(idStr)
+		} else {
+			invalid = invalidID02(idStr)
+		}
 		if invalid {
 			invalidSum += item
 		}
@@ -58,7 +76,7 @@ func sumInvalids(rng string) int {
 	return invalidSum
 }
 
-func invalidIDs(id string) bool {
+func invalidID(id string) bool {
 
 	for i := 1; i < len(id); i++ {
 		prefix := id[:i]
@@ -77,6 +95,30 @@ func invalidIDs(id string) bool {
 	return false
 }
 
+func invalidID02(id string) bool {
+	for i := 1; i < len(id); i++ {
+		prefix := id[:i]
+		tail := id[i:]
+
+		occurrences := strings.Count(id, prefix)
+		if occurrences < 2 {
+			continue
+		}
+
+		if tail[0] == '0' {
+			continue
+		}
+
+		cleanedTail := strings.ReplaceAll(tail, prefix, "")
+		if len(cleanedTail) > 0 {
+			continue
+		}
+
+		return true
+	}
+	return false
+}
+
 func buildRange(start int, end int) []int {
 	if start > end {
 		return []int{}
@@ -90,10 +132,6 @@ func buildRange(start int, end int) []int {
 	}
 
 	return rng
-}
-
-func part02(d *aoc_helpers.AOCDay) error {
-	return nil
 }
 
 func testIDRanges() []string {
