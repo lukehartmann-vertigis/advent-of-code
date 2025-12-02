@@ -35,8 +35,15 @@ func part01(d *aoc_helpers.AOCDay) (any, error) {
 }
 
 func part02(d *aoc_helpers.AOCDay) (any, error) {
+	colA, colB := getNumCols(d.Lines)
 
-	return 0, nil
+	colBStr := strings.Join(slice_helpers.Map(colB, func(item int) string { return strconv.Itoa(item) }), ",")
+
+	sum := 0
+	for _, num := range colA {
+		sum += num * strings.Count(colBStr, strconv.Itoa(num))
+	}
+	return sum, nil
 }
 
 func getNumCols(lines []string) ([]int, []int) {
