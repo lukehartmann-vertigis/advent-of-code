@@ -51,9 +51,7 @@ func (d *AOCDay) PushTask(t TaskFunc) {
 }
 
 func (d *AOCDay) Run() error {
-
 	fmt.Println("==========")
-	fmt.Printf("Running Day %d\n", d.Id)
 
 	for idx, task := range d.tasks {
 		res, err := task(d)
@@ -61,10 +59,11 @@ func (d *AOCDay) Run() error {
 			return err
 		}
 
-		fmt.Printf("Task %d: %v\n", idx, res)
+		fmt.Printf("| Task %d: %v\n", idx, res)
 	}
 
 	fmt.Println("==========")
+	fmt.Println()
 
 	return nil
 }

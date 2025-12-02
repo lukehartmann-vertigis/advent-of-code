@@ -1,7 +1,6 @@
-package aoc_2024
+package aoc_2024_day01
 
 import (
-	"fmt"
 	"math"
 	"slices"
 	"strconv"
@@ -20,7 +19,7 @@ func Day01() *aoc_helpers.AOCDay {
 	return day
 }
 
-func part01(d *aoc_helpers.AOCDay) error {
+func part01(d *aoc_helpers.AOCDay) (any, error) {
 	colA, colB := getNumCols(d.Lines)
 	sum := 0
 
@@ -32,14 +31,12 @@ func part01(d *aoc_helpers.AOCDay) error {
 		sum += int(diff)
 	}
 
-	fmt.Println(sum)
-
-	return nil
+	return sum, nil
 }
 
-func part02(d *aoc_helpers.AOCDay) error {
+func part02(d *aoc_helpers.AOCDay) (any, error) {
 
-	return nil
+	return 0, nil
 }
 
 func getNumCols(lines []string) ([]int, []int) {
