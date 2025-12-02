@@ -20,7 +20,7 @@ func Day02() *aoc_helpers.AOCDay {
 	return day
 }
 
-func part01(d *aoc_helpers.AOCDay) error {
+func part01(d *aoc_helpers.AOCDay) (any, error) {
 	ids := strings.Split(d.Input, ",")
 	sums := slice_helpers.Map(ids, func(item string) int {
 		return sumInvalids(item, true)
@@ -29,11 +29,10 @@ func part01(d *aoc_helpers.AOCDay) error {
 		return acc + elem
 	}, 0)
 
-	fmt.Println(sum)
-	return nil
+	return sum, nil
 }
 
-func part02(d *aoc_helpers.AOCDay) error {
+func part02(d *aoc_helpers.AOCDay) (any, error) {
 	ids := strings.Split(d.Input, ",")
 	sums := slice_helpers.Map(ids, func(item string) int {
 		return sumInvalids(item, false)
@@ -42,8 +41,7 @@ func part02(d *aoc_helpers.AOCDay) error {
 		return acc + elem
 	}, 0)
 
-	fmt.Println(sum)
-	return nil
+	return sum, nil
 }
 
 func sumInvalids(rng string, part01 bool) int {

@@ -12,7 +12,7 @@ import (
 
 const AOCHost = "https://adventofcode.com"
 
-type TaskFunc = func(d *AOCDay) error
+type TaskFunc = func(d *AOCDay) (any, error)
 
 type AOCDay struct {
 	Id       int
@@ -52,18 +52,26 @@ func (d *AOCDay) PushTask(t TaskFunc) {
 
 func (d *AOCDay) Run() error {
 
-	for _, task := range d.tasks {
-		if err := task(d); err != nil {
+	fmt.Println("==========")
+	fmt.Printf("Running Day %d\n", d.Id)
+
+	for idx, task := range d.tasks {
+		res, err := task(d)
+		if err != nil {
 			return err
 		}
+
+		fmt.Printf("Task %d: %v\n", idx, res)
 	}
+
+	fmt.Println("==========")
 
 	return nil
 }
 
 func (d *AOCDay) ensureInputFile() error {
 	if _, err := os.Stat(d.filePath); err == nil {
-		fmt.Printf("Input file already exists: '%s'\n", d.filePath)
+		// fmt.Printf("Input file already exists: '%s'\n", d.filePath)
 		return nil
 	} else if !os.IsNotExist(err) {
 		return err

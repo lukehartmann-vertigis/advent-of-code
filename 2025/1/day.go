@@ -29,12 +29,11 @@ func Day01() *aoc_helpers.AOCDay {
 	return day
 }
 
-func part01(d *aoc_helpers.AOCDay) error {
+func part01(d *aoc_helpers.AOCDay) (any, error) {
 	// testLines := strings.Split(testInput, "\n")
 	count := calculatePart01(d.Lines)
 
-	fmt.Println("PART 01:", count)
-	return nil
+	return count, nil
 }
 
 func calculatePart01(lines []string) (count int) {
@@ -56,11 +55,10 @@ func calculatePart01(lines []string) (count int) {
 	return count
 }
 
-func part02(d *aoc_helpers.AOCDay) error {
+func part02(d *aoc_helpers.AOCDay) (any, error) {
 	// testLines := strings.Split(testInput, "\n")
 	count := calculatePart02(d.Lines)
-	fmt.Println("PART 02:", count)
-	return nil
+	return count, nil
 }
 
 func calculatePart02(lines []string) (count int) {
