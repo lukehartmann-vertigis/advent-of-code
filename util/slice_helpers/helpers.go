@@ -26,3 +26,12 @@ func Reduce[T, U any](source []T, reduceFn func(acc U, elem T) U, initial U) U {
 
 	return result
 }
+
+func Some[T any](target []T, someFunc func(item T) bool) bool {
+	for _, item := range target {
+		if someFunc(item) {
+			return true
+		}
+	}
+	return false
+}

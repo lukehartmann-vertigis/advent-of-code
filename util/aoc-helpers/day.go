@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 const AOCHost = "https://adventofcode.com"
@@ -15,6 +16,7 @@ type TaskFunc = func(d *AOCDay) error
 
 type AOCDay struct {
 	Id       int
+	Input    string
 	Lines    []string
 	inputUrl string
 	filePath string
@@ -127,10 +129,14 @@ func (d *AOCDay) loadInput() error {
 	buf := make([]byte, 0, 64*1024)
 	scanner.Buffer(buf, maxCap)
 
+	var inputBuffer strings.Builder
 	var lines = []string{}
 	for scanner.Scan() {
 		lines = append(lines, scanner.Text())
+		inputBuffer.WriteString(scanner.Text())
 	}
+	d.Input = inputBuffer.String()
+
 	if err := scanner.Err(); err != nil {
 		return err
 	}

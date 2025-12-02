@@ -1,11 +1,10 @@
-package aoc_2025
+package aoc_2025_day01
 
 import (
 	"fmt"
 	"math"
 	"regexp"
 	"strconv"
-	"strings"
 
 	aoc_helpers "github.com/Djosar/advent-of-code/util/aoc-helpers"
 )
@@ -31,8 +30,8 @@ func Day01() *aoc_helpers.AOCDay {
 }
 
 func part01(d *aoc_helpers.AOCDay) error {
-	testLines := strings.Split(testInput, "\n")
-	count := calculatePart01(testLines)
+	// testLines := strings.Split(testInput, "\n")
+	count := calculatePart01(d.Lines)
 
 	fmt.Println("PART 01:", count)
 	return nil
@@ -43,7 +42,6 @@ func calculatePart01(lines []string) (count int) {
 	dial := 50
 
 	for _, line := range lines {
-		fmt.Println(dial)
 		val, err := parseLine(line)
 		if err != nil {
 			fmt.Println(err)
@@ -51,7 +49,6 @@ func calculatePart01(lines []string) (count int) {
 		}
 		dial += val
 		if dial%100 == 0 {
-			fmt.Println(dial)
 			count += 1
 		}
 	}
