@@ -8,6 +8,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/Djosar/advent-of-code/util/collections"
 )
 
 const AOCHost = "https://adventofcode.com"
@@ -18,6 +20,7 @@ type AOCDay struct {
 	Id       int
 	Input    string
 	Lines    []string
+	Matrix   *collections.Matrix[string]
 	inputUrl string
 	filePath string
 	tasks    []TaskFunc
@@ -142,7 +145,11 @@ func (d *AOCDay) loadInput() error {
 		lines = append(lines, scanner.Text())
 		inputBuffer.WriteString(scanner.Text())
 	}
+	input := inputBuffer.String()
 	d.Input = inputBuffer.String()
+
+	matrixWidth := len(lines[0])
+	d.Matrix = collections.NewMatrix(strings.Split(input, ""), matrixWidth)
 
 	if err := scanner.Err(); err != nil {
 		return err

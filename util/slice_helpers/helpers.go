@@ -35,3 +35,12 @@ func Some[T any](target []T, someFunc func(item T) bool) bool {
 	}
 	return false
 }
+
+func Count[T comparable](source []T, candidate T) (count int) {
+	for _, item := range source {
+		if item == candidate {
+			count++
+		}
+	}
+	return count
+}

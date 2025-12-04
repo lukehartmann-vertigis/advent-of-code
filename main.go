@@ -11,6 +11,7 @@ import (
 	aoc_2025_day01 "github.com/Djosar/advent-of-code/2025/1"
 	aoc_2025_day02 "github.com/Djosar/advent-of-code/2025/2"
 	aoc_2025_day03 "github.com/Djosar/advent-of-code/2025/3"
+	aoc_2025_day04 "github.com/Djosar/advent-of-code/2025/4"
 	aoc_helpers "github.com/Djosar/advent-of-code/util/aoc-helpers"
 	"github.com/joho/godotenv"
 )
@@ -69,6 +70,7 @@ func yearsDict() map[int]*aoc_helpers.AOCYear {
 			aoc_2025_day01.Day01(),
 			aoc_2025_day02.Day02(),
 			aoc_2025_day03.Day03(),
+			aoc_2025_day04.Day04(),
 		}),
 	}
 }
