@@ -143,7 +143,7 @@ func (d *AOCDay) loadInput() error {
 	var lines = []string{}
 	for scanner.Scan() {
 		lines = append(lines, scanner.Text())
-		inputBuffer.WriteString(scanner.Text())
+		inputBuffer.WriteString(scanner.Text() + "\n")
 	}
 	input := inputBuffer.String()
 	d.Input = inputBuffer.String()
