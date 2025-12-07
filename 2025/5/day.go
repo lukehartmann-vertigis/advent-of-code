@@ -1,7 +1,6 @@
 package aoc_2025_day05
 
 import (
-	"fmt"
 	"slices"
 	"strconv"
 	"strings"
@@ -101,8 +100,6 @@ func part02(d *aoc_helpers.AOCDay) (any, error) {
 		} else {
 			merged = append(merged, rng)
 		}
-
-		fmt.Println(merged)
 	}
 
 	diffSum := 0
