@@ -21,7 +21,7 @@ R14
 L82`
 
 func Day01() *aoc_helpers.AOCDay {
-	day := aoc_helpers.NewDay(1, 2025)
+	day := aoc_helpers.NewDay(1, 2025, testInput)
 
 	day.PushTask(part01)
 	day.PushTask(part02)

@@ -11,7 +11,7 @@ import (
 )
 
 func Day01() *aoc_helpers.AOCDay {
-	day := aoc_helpers.NewDay(1, 2024)
+	day := aoc_helpers.NewDay(1, 2024, "")
 
 	day.PushTask(part01)
 	day.PushTask(part02)

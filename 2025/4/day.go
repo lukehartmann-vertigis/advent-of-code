@@ -20,7 +20,7 @@ const testInput = `..@@.@@@@.
 @.@.@@@.@.`
 
 func Day04() *aoc_helpers.AOCDay {
-	day := aoc_helpers.NewDay(4, 2025)
+	day := aoc_helpers.NewDay(4, 2025, testInput)
 	day.PushTask(part01)
 	day.PushTask(part02)
 	return day

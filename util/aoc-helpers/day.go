@@ -17,25 +17,30 @@ const AOCHost = "https://adventofcode.com"
 type TaskFunc = func(d *AOCDay) (any, error)
 
 type AOCDay struct {
-	Id       int
-	Input    string
-	Lines    []string
-	Matrix   *collections.Matrix[string]
-	inputUrl string
-	filePath string
-	tasks    []TaskFunc
+	Id        int
+	TestInput string
+	TestLines []string
+	Input     string
+	Lines     []string
+	Matrix    *collections.Matrix[string]
+	inputUrl  string
+	filePath  string
+	tasks     []TaskFunc
 }
 
-func NewDay(id int, year int) *AOCDay {
+func NewDay(id int, year int, testInput string) *AOCDay {
 	filePath := fmt.Sprintf("./%d/%d/input.txt", year, id)
 	inputUrl := fmt.Sprintf("%s/%d/day/%d/input", AOCHost, year, id)
+	testLines := strings.Split(testInput, "\n")
 
 	day := &AOCDay{
-		Id:       id,
-		Lines:    []string{},
-		inputUrl: inputUrl,
-		filePath: filePath,
-		tasks:    []TaskFunc{},
+		Id:        id,
+		TestInput: testInput,
+		TestLines: testLines,
+		Lines:     []string{},
+		inputUrl:  inputUrl,
+		filePath:  filePath,
+		tasks:     []TaskFunc{},
 	}
 
 	if err := day.ensureInputFile(); err != nil {

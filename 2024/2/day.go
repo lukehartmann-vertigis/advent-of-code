@@ -17,7 +17,7 @@ const testInput = `7 6 4 2 1
 1 3 6 7 9`
 
 func Day02() *aoc_helpers.AOCDay {
-	day := aoc_helpers.NewDay(2, 2024)
+	day := aoc_helpers.NewDay(2, 2024, testInput)
 	day.PushTask(part01)
 	day.PushTask(part02)
 	return day
