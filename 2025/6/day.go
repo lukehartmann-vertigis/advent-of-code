@@ -1,7 +1,7 @@
 package aoc_2025_day06
 
 import (
-	"fmt"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -17,6 +17,7 @@ const testInput = `123 328  51 64
 func Day06() *aoc_helpers.AOCDay {
 	day := aoc_helpers.NewDay(6, 2025)
 	day.PushTask(part01)
+	day.PushTask(part02)
 	return day
 }
 
@@ -61,11 +62,62 @@ func part01(d *aoc_helpers.AOCDay) (any, error) {
 		res += slice_helpers.Reduce(col, func(acc, curr int) int {
 			return runOperation(operation)(acc, curr)
 		}, start)
-		fmt.Println(operation, col, res)
 
 	}
 
 	return res, nil
+}
+
+func part02(d *aoc_helpers.AOCDay) (any, error) {
+	lines := d.Lines
+	opsIndex := len(lines) - 1
+	opsLine := lines[opsIndex]
+	valueLines := lines[:opsIndex]
+	opRegex := regexp.MustCompile(`[+*]\s`)
+	colRanges := slice_helpers.Map(opRegex.FindAllStringIndex(opsLine, -1), func(item []int) int {
+		return item[0]
+	})
+
+	newNums := make([][]int, len(colRanges))
+
+	for rngIdx, start := range colRanges {
+		end := len(opsLine)
+		if rngIdx < len(colRanges)-1 {
+			end = colRanges[rngIdx+1] - 1
+		}
+
+		numStringsCnt := end - start
+		newNumStrings := make([]string, numStringsCnt)
+
+		for _, line := range valueLines {
+			val := line[start:end]
+
+			for charIdx, char := range val {
+				currentVal := newNumStrings[charIdx]
+				newNumStrings[charIdx] = strings.TrimSpace(currentVal + string(char))
+			}
+		}
+
+		newNums[rngIdx] = slice_helpers.Map(newNumStrings, func(item string) int {
+			val, _ := strconv.Atoi(item)
+			return val
+		})
+	}
+
+	sum := 0
+	for colIdx, start := range colRanges {
+		op := string(opsLine[start])
+		start := 0
+		if op == "*" {
+			start = 1
+		}
+		res := slice_helpers.Reduce(newNums[colIdx], func(acc, curr int) int {
+			return runOperation(op)(acc, curr)
+		}, start)
+		sum += res
+	}
+
+	return sum, nil
 }
 
 func runOperation(op string) func(a, b int) int {
